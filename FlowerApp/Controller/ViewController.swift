@@ -26,6 +26,7 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
         imageView.image = UIImage(named: "Image4")
+        
     }
 
     @IBAction func tappedCamera(_ sender: UIBarButtonItem) {

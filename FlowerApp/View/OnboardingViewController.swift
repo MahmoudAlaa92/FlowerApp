@@ -35,14 +35,17 @@ class OnboardingViewController: UIViewController {
         
         slides = [
             OnboardingSlide(title: "Send flower and send a smile!", description: "Dicover freash flowers online,gift baskets,and florist-designed arrangements", image: UIImage(named:"image3")!), OnboardingSlide(title: "Find your favorite flowers", description: "You can find any type of your favorite flower in this application", image: UIImage(named:"image2")!),OnboardingSlide(title: "Welcome To Our Flowers App ", description: "Beauty flower", image: UIImage(named:"image1")!)
-                ]
+        ]
     }
     @IBAction func nextclicked(_ sender: UIButton) {
         if currentPage == slides.count - 1 {
-            let vc = storyboard?.instantiateViewController(identifier: "homeNV") as! UINavigationController
-            vc.modalPresentationStyle = .fullScreen
-            vc.modalTransitionStyle = .flipHorizontal
-            present(vc ,animated: true)
+            
+            let userDF = UserDefaults.standard
+            userDF.setValue(true, forKey: "mainPageState")
+            
+            let vc = storyboard?.instantiateViewController(identifier: "mainPG") as! ViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }else{
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)

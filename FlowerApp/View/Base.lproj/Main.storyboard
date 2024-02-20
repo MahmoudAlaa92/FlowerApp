@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oNf-qB-9or">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LIm-mt-gg5">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -64,11 +64,11 @@
             <objects>
                 <viewController storyboardIdentifier="collectionPG" id="LIm-mt-gg5" customClass="OnboardingViewController" customModule="FlowerApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DIB-t0-BmB">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Zn-XC-nFd">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="711.33333333333337"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="628.33333333333337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="TtF-h5-Dgf">
                                     <size key="itemSize" width="393" height="630"/>
@@ -78,7 +78,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OnboardingCollectionViewCell" id="43L-nj-lVg" customClass="OnboardingCollectionViewCell" customModule="FlowerApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="40.666666666666664" width="393" height="630"/>
+                                        <rect key="frame" x="0.0" y="-0.66666666666666663" width="393" height="630"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Nb5-nb-oPz">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="630"/>
@@ -126,12 +126,12 @@
                                 </cells>
                             </collectionView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="IaJ-Eh-FxB">
-                                <rect key="frame" x="138.66666666666666" y="711.33333333333337" width="115.66666666666666" height="25.666666666666629"/>
+                                <rect key="frame" x="138.66666666666666" y="687.33333333333337" width="115.66666666666666" height="25.666666666666629"/>
                                 <color key="pageIndicatorTintColor" systemColor="systemGray6Color"/>
                                 <color key="currentPageIndicatorTintColor" red="0.84234162414965985" green="0.01422600294625841" blue="0.66472839132312922" alpha="0.74671461090000002" colorSpace="custom" customColorSpace="displayP3"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAd-Aq-FPK">
-                                <rect key="frame" x="121.66666666666669" y="752" width="150" height="50"/>
+                                <rect key="frame" x="121.66666666666669" y="728" width="150" height="50"/>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.36862745098039218" blue="0.82352941176470584" alpha="0.7467146109271523" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6H3-uh-TwW"/>
@@ -168,12 +168,11 @@
                         <outlet property="colllectionView" destination="4Zn-XC-nFd" id="yXp-O9-QqF"/>
                         <outlet property="nextButton" destination="dAd-Aq-FPK" id="GF4-vP-Uan"/>
                         <outlet property="pageControl" destination="IaJ-Eh-FxB" id="QDK-5K-F2h"/>
-                        <segue destination="BYZ-38-t0r" kind="push" id="P8a-OJ-6IC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEb-Zt-fOh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="-49"/>
+            <point key="canvasLocation" x="469" y="-49"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2vf-5B-XHz">
@@ -189,17 +188,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="LIm-mt-gg5" kind="push" id="Jcz-Ue-4lf"/>
-                        <segue destination="LIm-mt-gg5" kind="relationship" relationship="rootViewController" id="dTg-7C-X1J"/>
+                        <segue destination="BYZ-38-t0r" kind="show" id="UAr-8B-1zB"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Mj2-Wl-P0q"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fbn-NY-Gx0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407" y="-49"/>
+            <point key="canvasLocation" x="1230" y="-49"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Jcz-Ue-4lf"/>
+        <segue reference="UAr-8B-1zB"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="groupTableViewBackgroundColor"/>
     <resources>
@@ -210,7 +209,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

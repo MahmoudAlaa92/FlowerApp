@@ -43,8 +43,12 @@ class OnboardingViewController: UIViewController {
             let userDF = UserDefaults.standard
             userDF.setValue(true, forKey: "mainPageState")
             
-            let vc = storyboard?.instantiateViewController(identifier: "mainPG") as! ViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            let nvcontroller = storyboard?.instantiateViewController(identifier: "homeNV") as! UINavigationController
+            
+            nvcontroller.modalPresentationStyle = .fullScreen
+            nvcontroller.modalTransitionStyle = .flipHorizontal
+            
+            present(nvcontroller,animated: true)
             
         }else{
             currentPage += 1

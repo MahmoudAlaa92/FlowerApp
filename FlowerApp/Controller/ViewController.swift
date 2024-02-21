@@ -13,24 +13,72 @@ import SwiftyJSON
 import SDWebImage
 
 class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavigationControllerDelegate {
-    @IBOutlet weak var imageView: UIImageView!
- 
-    @IBOutlet weak var descriptionLabel: UILabel!
     
     let wikipediaUrl = "https://en.wikipedia.org/w/api.php"
+    var imageView = UIImageView()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+        return scrollView
+    }()
+    
+    private let smallImage: UIImageView = {
+       let smallImage = UIImageView()
+        smallImage.image = UIImage(named: "image6")
+        smallImage.contentMode = .scaleAspectFit
+        return smallImage
+    }()
+    
+    private let label : UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let button: UIButton = {
+       let button = UIButton()
+        button.setTitle("Take Photo", for: .normal)
+        button.backgroundColor = .systemPink
+        button.layer.cornerRadius = 10
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.addTarget(ViewController.self, action: #selector(buttonTapped), for: .touchUpInside)
+        return button
+    }()
     
     let imagePicker = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
+        setImage(image: "background")
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(smallImage)
+        scrollView.addSubview(label)
+        scrollView.addSubview(button)
+        
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
-        imageView.image = UIImage(named: "Image4")
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+       
+    }
 
-    @IBAction func tappedCamera(_ sender: UIBarButtonItem) {
-        present(imagePicker ,animated: true)
+    func setImage(image : String){
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "background")
+        backgroundImage.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImage)
+        view.sendSubviewToBack(backgroundImage)
+    }
+    
+    @objc func buttonTapped(){
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -86,7 +134,7 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
                 let jsonData = JSON(data)
                 let idPage = jsonData["query"]["pageids"][0].stringValue
                 let txt = jsonData["query"]["pages"]["\(idPage)"]["extract"].stringValue
-                    self.descriptionLabel.text = txt
+                    self.label.text = txt
                 print(txt)
                 let imageLinkWeb = jsonData["query"]["pages"]["\(idPage)"]["thumbnail"]["source"].stringValue
                 self.imageView.sd_setImage(with: URL(string: imageLinkWeb))

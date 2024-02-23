@@ -24,26 +24,42 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
     }()
     
     private let smallImage: UIImageView = {
-       let smallImage = UIImageView()
+        let smallImage = UIImageView()
         smallImage.image = UIImage(named: "image6")
-        smallImage.contentMode = .scaleAspectFit
+        smallImage.contentMode = .scaleToFill
+        smallImage.layer.masksToBounds = true
         return smallImage
     }()
     
-    private let label : UILabel = {
-       let label = UILabel()
+    private let typeFlower : UILabel = {
+        let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.text = "Type of flower"
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
     
+    private let descriptionOfFlower: UILabel = {
+        let descriptionOfFlower = UILabel()
+        descriptionOfFlower.textAlignment = .center
+        descriptionOfFlower.numberOfLines = 0
+        descriptionOfFlower.text = "Description of the flower"
+        descriptionOfFlower.adjustsFontSizeToFitWidth = true
+        return descriptionOfFlower
+    }()
+    
     private let button: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Take Photo", for: .normal)
-        button.backgroundColor = .systemPink
-        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(named: "colorOfButton")
+        button.layer.cornerRadius = 11
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.addTarget(ViewController.self, action: #selector(buttonTapped), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -52,22 +68,36 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
         super.viewDidLoad()
         setImage(image: "background")
         
+        // add sub View
+        
         view.addSubview(scrollView)
         scrollView.addSubview(smallImage)
-        scrollView.addSubview(label)
+        scrollView.addSubview(typeFlower)
         scrollView.addSubview(button)
+        scrollView.addSubview(descriptionOfFlower)
         
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = false
-        
+        imagePicker.allowsEditing = true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-       
+        scrollView.frame = view.frame
+        
+        smallImage.frame = CGRect(x: 30,
+                                  y: scrollView.frame.size.height/2,
+                                  width: scrollView.frame.size.width-60,
+                                  height: scrollView.frame.size.height/2-(30))
+        button.frame = CGRect(x: 60,
+                              y: smallImage.bottom-50 ,
+                              width:smallImage.width-60 ,
+                              height: 40)
+        typeFlower.frame = CGRect(x: 90, y: smallImage.top+30, width: smallImage.width-100, height: 40)
+        descriptionOfFlower.frame = CGRect(x: 90, y: typeFlower.bottom, width: smallImage.width-100, height: smallImage.height-130)
     }
+    
 
     func setImage(image : String){
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
@@ -77,13 +107,25 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
         view.sendSubviewToBack(backgroundImage)
     }
     
-    @objc func buttonTapped(){
+    func sdSetImage (image: UIImageView){
+        var backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage = image
+        backgroundImage.contentMode = .scaleAspectFill
         
+        scrollView.addSubview(backgroundImage)
+        scrollView.sendSubviewToBack(backgroundImage)
+      
+        backgroundImage.frame = CGRect(x: 30,
+                                  y: scrollView.top,
+                                  width: scrollView.frame.size.width,
+                                  height: scrollView.frame.size.height)
+    }
+    @objc func buttonTapped(){
+        self.present(imagePicker,animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//          imageView.image = selectedImage
             
             guard let ciImage = CIImage(image: selectedImage) else{
                 fatalError("Error when covert to ciimage")
@@ -93,24 +135,22 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
         imagePicker.dismiss(animated: true)
     }
     
-    
     func detect (image: CIImage){
         
         guard let model = try? VNCoreMLModel(for: FlowerClassifier().model) else {
             fatalError("Cannot import model")
-            
         }
         
         let request = VNCoreMLRequest(model: model) { request, error in
-
+            
             print(request)
-
+            
             guard let result = request.results?.first as? VNClassificationObservation else {
                 fatalError("Error when classify image. ")
             }
-            self.navigationItem.title = result.identifier.capitalized
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-
+            self.typeFlower.text = result.identifier.capitalized
+           
+            
             self.requestInfo(flowerName: result.identifier)
         }
         
@@ -128,16 +168,16 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
         var parameters = ParameterOfUrl().parameters
         parameters["titles"] = flowerName
         
-        AF.request(wikipediaUrl, method: .get, parameters: parameters).responseJSON { response in
+        AF.request(wikipediaUrl ,method: .get, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let data):
                 let jsonData = JSON(data)
                 let idPage = jsonData["query"]["pageids"][0].stringValue
                 let txt = jsonData["query"]["pages"]["\(idPage)"]["extract"].stringValue
-                    self.label.text = txt
-                print(txt)
+                self.descriptionOfFlower.text = txt
                 let imageLinkWeb = jsonData["query"]["pages"]["\(idPage)"]["thumbnail"]["source"].stringValue
                 self.imageView.sd_setImage(with: URL(string: imageLinkWeb))
+                self.sdSetImage(image:self.imageView)
             case .failure(let error):
                 print(error)
             }

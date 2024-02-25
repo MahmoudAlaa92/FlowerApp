@@ -76,9 +76,6 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
         scrollView.addSubview(button)
         scrollView.addSubview(descriptionOfFlower)
         
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,8 +91,14 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
                               y: smallImage.bottom-50 ,
                               width:smallImage.width-60 ,
                               height: 40)
-        typeFlower.frame = CGRect(x: 90, y: smallImage.top+30, width: smallImage.width-100, height: 40)
-        descriptionOfFlower.frame = CGRect(x: 90, y: typeFlower.bottom, width: smallImage.width-100, height: smallImage.height-130)
+        typeFlower.frame = CGRect(x: 90,
+                                  y: smallImage.top+30,
+                                  width: smallImage.width-100,
+                                  height: 40)
+        descriptionOfFlower.frame = CGRect(x: 90,
+                                           y: typeFlower.bottom,
+                                           width: smallImage.width-100,
+                                           height: smallImage.height-130)
     }
     
 
@@ -121,7 +124,45 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
                                   height: scrollView.frame.size.height)
     }
     @objc func buttonTapped(){
-        self.present(imagePicker,animated: true)
+        showImagePickerOption()
+    }
+    
+    func imagePicker(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.allowsEditing = true
+
+        return imagePicker
+    }
+    
+    func showImagePickerOption(){
+        let alertVC = UIAlertController(title: "Pick a Photo", message: "choose a picture from liberary or camera", preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] (action) in
+            guard let self = self else{
+                return
+            }
+            
+            let cameraImagePicker = self.imagePicker(sourceType: .camera)
+            cameraImagePicker.delegate = self
+            self.present(cameraImagePicker,animated: true)
+        }
+        
+        let liberaryAction = UIAlertAction(title: "Liberary", style: .default) { [weak self] (action) in
+            
+            guard let self = self else{
+                return
+            }
+            let liberaryPicker = self.imagePicker(sourceType: .photoLibrary)
+            liberaryPicker.delegate = self
+            self.present(liberaryPicker,animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertVC.addAction(cameraAction)
+        alertVC.addAction(liberaryAction)
+        alertVC.addAction(cancelAction)
+        self.present(alertVC,animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -132,7 +173,7 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate ,UINavig
             }
             detect(image: ciImage)
         }
-        imagePicker.dismiss(animated: true)
+        self.dismiss(animated: true)
     }
     
     func detect (image: CIImage){

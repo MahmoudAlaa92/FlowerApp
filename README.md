@@ -9,3 +9,10 @@
 - **Wikipedia Integration:** Information, including images, about each type of flower is fetched from the Wikipedia site using Alamofire.
 - **Flower Model:** A Core ML model is trained to classify and identify flowers based on their features.
 
+## Application images
+
+--------------------------------------------------------------------------
+
+
+https://github.com/MahmoudAlaa92/FlowerApp/assets/143525272/cc8021b8-d778-403f-ab41-1f7c2f04e767
+

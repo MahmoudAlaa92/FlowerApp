@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
-extension UIView {
-    @IBInspectable var cornerRadius : CGFloat {
-        get { return self.cornerRadius }
-        set { self.layer.cornerRadius = newValue }
+extension UIViewController {
+    
+    static var identifiere: String {
+        return String(describing: self)
+    }
+    
+    static func instantiate() -> Self {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(identifier: identifiere) as! Self
     }
 }

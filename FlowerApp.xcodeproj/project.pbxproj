@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E25BB6A2B8BAC79007411B8 /* FlowerClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E25BB692B8BAC78007411B8 /* FlowerClassifier.mlmodel */; };
+		1E3673912B94E0A9008D4F23 /* FlowerClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E3673902B94E0A9008D4F23 /* FlowerClassifier.mlmodel */; };
 		1E6961092B6FC5860087FD3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6961082B6FC5860087FD3F /* AppDelegate.swift */; };
 		1E69610B2B6FC5860087FD3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E69610A2B6FC5860087FD3F /* SceneDelegate.swift */; };
 		1E69610D2B6FC5860087FD3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E69610C2B6FC5860087FD3F /* ViewController.swift */; };
@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E25BB692B8BAC78007411B8 /* FlowerClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FlowerClassifier.mlmodel; sourceTree = "<group>"; };
+		1E3673902B94E0A9008D4F23 /* FlowerClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FlowerClassifier.mlmodel; sourceTree = "<group>"; };
 		1E6961052B6FC5860087FD3F /* FlowerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E6961082B6FC5860087FD3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E69610A2B6FC5860087FD3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 			children = (
 				1E6961082B6FC5860087FD3F /* AppDelegate.swift */,
 				1E69610A2B6FC5860087FD3F /* SceneDelegate.swift */,
-				1E25BB692B8BAC78007411B8 /* FlowerClassifier.mlmodel */,
+				1E3673902B94E0A9008D4F23 /* FlowerClassifier.mlmodel */,
 				1EFF71482B76A355003652CE /* Extensions */,
 				1EFF714B2B76A657003652CE /* Model */,
 				1EFD63C62B77FD710027A2FF /* Controller */,
@@ -266,7 +266,7 @@
 				1EFF714D2B76A695003652CE /* OnboardingSlide.swift in Sources */,
 				1EFD63C32B77C1F10027A2FF /* ParameterOfUrl.swift in Sources */,
 				1E69610D2B6FC5860087FD3F /* ViewController.swift in Sources */,
-				1E25BB6A2B8BAC79007411B8 /* FlowerClassifier.mlmodel in Sources */,
+				1E3673912B94E0A9008D4F23 /* FlowerClassifier.mlmodel in Sources */,
 				1EFF71472B769DD8003652CE /* OnboardingViewController.swift in Sources */,
 				1E6961092B6FC5860087FD3F /* AppDelegate.swift in Sources */,
 				1EFF71502B76AD58003652CE /* OnboardingCollectionViewCell.swift in Sources */,

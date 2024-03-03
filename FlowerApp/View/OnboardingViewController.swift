@@ -40,8 +40,7 @@ class OnboardingViewController: UIViewController {
     @IBAction func nextclicked(_ sender: UIButton) {
         if currentPage == slides.count - 1 {
             
-            let userDF = UserDefaults.standard
-            userDF.setValue(true, forKey: "mainPageState")
+            UserDefaults.standard.setValue(true, forKey: "mainPageState")
             
             let nvcontroller = storyboard?.instantiateViewController(identifier: "homeNV") as! UINavigationController
             

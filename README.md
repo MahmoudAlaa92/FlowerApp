@@ -9,7 +9,7 @@
 - **Wikipedia Integration:** Information, including images, about each type of flower is fetched from the Wikipedia site using Alamofire.
 - **Flower Model:** A Core ML model is trained to classify and identify flowers based on their features.
 
-## Application images
+## Application 
 
 --------------------------------------------------------------------------
 
